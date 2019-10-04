@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>My New Post | Hexo</title>
+  <title>TextView和EditText的gettext（）方法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##第一章 内容：    如何搭建一个博客 ##第二章 内容：如何创建一个博客文章">
+  <meta name="description" content="TextView的getText（）方法，返回类型是CharSequence，如果判断是否为空的话，只要equals.(&amp;quot;&amp;quot;)或者toString.isEmpty()即可，因为String是CharSequence的实现类，可以直接equals，而且源码中已经为其默认赋值为“”，没有为null的时候。 EditText的getText（）方法，返回类型是Editable，如果判">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My New Post">
+<meta property="og:title" content="TextView和EditText的gettext（）方法">
 <meta property="og:url" content="http://yoursite.com/2019/10/03/My-New-Post/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="##第一章 内容：    如何搭建一个博客 ##第二章 内容：如何创建一个博客文章">
+<meta property="og:description" content="TextView的getText（）方法，返回类型是CharSequence，如果判断是否为空的话，只要equals.(&amp;quot;&amp;quot;)或者toString.isEmpty()即可，因为String是CharSequence的实现类，可以直接equals，而且源码中已经为其默认赋值为“”，没有为null的时候。 EditText的getText（）方法，返回类型是Editable，如果判">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-02T17:45:15.567Z">
+<meta property="og:updated_time" content="2019-10-04T13:49:14.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My New Post">
-<meta name="twitter:description" content="##第一章 内容：    如何搭建一个博客 ##第二章 内容：如何创建一个博客文章">
+<meta name="twitter:title" content="TextView和EditText的gettext（）方法">
+<meta name="twitter:description" content="TextView的getText（）方法，返回类型是CharSequence，如果判断是否为空的话，只要equals.(&amp;quot;&amp;quot;)或者toString.isEmpty()即可，因为String是CharSequence的实现类，可以直接equals，而且源码中已经为其默认赋值为“”，没有为null的时候。 EditText的getText（）方法，返回类型是Editable，如果判">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -161,7 +161,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      My New Post
+      TextView和EditText的gettext（）方法
     </h1>
   
 
@@ -174,11 +174,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##第一章</p>
-<p>内容：<br>    如何搭建一个博客</p>
-<p>##第二章</p>
-<p>内容：<br>如何创建一个博客文章</p>
+        <pre><code>TextView的getText（）方法，返回类型是CharSequence，如果判断是否为空的话，只要equals.(&quot;&quot;)或者toString.isEmpty()即可，因为String是CharSequence的实现类，可以直接equals，而且源码中已经为其默认赋值为“”，没有为null的时候。
+EditText的getText（）方法，返回类型是Editable，如果判断是否为空，不能==null，因为不为null，也不能equals（“”），因为类型不一样，只能toString.isEmpty()或者toString.equals(&quot;&quot;),因为EditText继承的TextView，所以默认也为“”，没有null的情况。
 
+setText()方法报错：
+当调用setText()方法时如果传入int型是不会被当成内容而是resourceID来使用！所以报错！
+解决方法：TextView.setText(&quot;&quot; + arg)</code></pre>
       
 
       
