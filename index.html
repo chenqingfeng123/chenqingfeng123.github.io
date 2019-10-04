@@ -159,7 +159,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/03/the-second-text/">the second text</a>
+      <a class="article-title" href="/2019/10/03/the-second-text/">Android:getText()报错空值</a>
     </h1>
   
 
@@ -172,7 +172,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##第一章<br>这是我的第二篇博客</p>
+        <p>我在运行Android:setText()时，提示空值错误。<br>原来是我将gettext(layout)方法写在了setContentView()后面<br>都还没有得到layout当然得layout里面控件的值。</p>
+<p>解决方法：<br>    将getText()方法写在了setContentView的后面。</p>
 
       
 
