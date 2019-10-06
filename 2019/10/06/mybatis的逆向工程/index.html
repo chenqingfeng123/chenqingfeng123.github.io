@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>mybatis的逆向工程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                                                                                    &amp;">
+  <meta name="description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                            是否去除自动生成的注释 true：是 ： false:否">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis的逆向工程">
 <meta property="og:url" content="http://yoursite.com/2019/10/06/mybatis的逆向工程/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                                                                                    &amp;">
+<meta property="og:description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                            是否去除自动生成的注释 true：是 ： false:否">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T14:14:33.413Z">
+<meta property="og:updated_time" content="2019-10-06T14:19:59.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis的逆向工程">
-<meta name="twitter:description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                                                                                    &amp;">
+<meta name="twitter:description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                            是否去除自动生成的注释 true：是 ： false:否">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -184,50 +184,49 @@
 <generatorconfiguration>
     <context id="testTables" targetruntime="MyBatis3">
         <commentgenerator>
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            是否去除自动生成的注释 true：是 ： false:否
             <property name="suppressAllComments" value="true">
         </property></commentgenerator>
-        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        数据库连接的信息：驱动类、连接地址、用户名、密码
         <jdbcconnection driverclass="com.mysql.jdbc.Driver" connectionurl="jdbc:mysql://localhost:3306/zshop" userid="root" password="admin">
         </jdbcconnection>
 
 
-<pre><code>    &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
-        NUMERIC 类型解析为java.math.BigDecimal --&gt;
+<pre><code>    默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+        NUMERIC 类型解析为java.math.BigDecimal
     &lt;javaTypeResolver&gt;
         &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
     &lt;/javaTypeResolver&gt;
 
-    &lt;!-- targetProject:生成PO类的位置 --&gt;
+    targetProject:生成PO类的位置
     &lt;javaModelGenerator targetPackage=&quot;com.cqf.dao&quot;
         targetProject=&quot;.\src&quot;&gt;
-        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        enableSubPackages:是否让schema作为包的后缀
         &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
-        &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;
+        从数据库返回的值被清理前后的空格
         &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
     &lt;/javaModelGenerator&gt;
-    &lt;!-- targetProject:mapper映射文件生成的位置 --&gt;
+    targetProject:mapper映射文件生成的位置
     &lt;sqlMapGenerator targetPackage=&quot;com.cqf.mapper&quot; 
         targetProject=&quot;.\src&quot;&gt;
-        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        enableSubPackages:是否让schema作为包的后缀
         &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
     &lt;/sqlMapGenerator&gt;
-    &lt;!-- targetPackage：mapper接口生成的位置 --&gt;
+    targetPackage：mapper接口生成的位置
     &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
         targetPackage=&quot;com.cqf.mapper&quot; 
         targetProject=&quot;.\src&quot;&gt;
-        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        enableSubPackages:是否让schema作为包的后缀
         &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
     &lt;/javaClientGenerator&gt;
-    &lt;!-- 指定数据库表 --&gt;
-    &lt;!-- &lt;table schema=&quot;&quot; tableName=&quot;user&quot;&gt;&lt;/table&gt;
+    指定数据库表
+    &lt;table schema=&quot;&quot; tableName=&quot;user&quot;&gt;&lt;/table&gt;
     &lt;table schema=&quot;&quot; tableName=&quot;orders&quot;&gt;&lt;/table&gt;
     &lt;table schema=&quot;&quot; tableName=&quot;items&quot;&gt;&lt;/table&gt;
-    &lt;table schema=&quot;&quot; tableName=&quot;orderdetail&quot;&gt;&lt;/table&gt; --&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;orderdetail&quot;&gt;&lt;/table&gt;
 
-    &lt;!-- 有些表的字段需要指定java类型 --&gt;
+    有些表的字段需要指定java类型
      &lt;table tableName=&quot;t_sysuser&quot; domainObjectName=&quot;user&quot;&gt;&lt;/table&gt;
-
 
 
 &lt;/context&gt;</code></pre></context></generatorconfiguration>
