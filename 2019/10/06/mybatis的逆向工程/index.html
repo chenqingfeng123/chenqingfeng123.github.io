@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Hexo</title>
+  <title>mybatis的逆向工程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                                                                                    &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis的逆向工程">
+<meta property="og:url" content="http://yoursite.com/2019/10/06/mybatis的逆向工程/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                                                                                    &amp;">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-06T14:14:33.413Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="mybatis的逆向工程">
+<meta name="twitter:description" content="如何使用mybatis的逆向工程？第一步：创建generatorConfig.xml 第二步：配置generatorConfig.xml中的信息 第三步：创建相应的包，接收工程产生的代码 第四部：创建对于的main函数来实现 附：                                                                                    &amp;">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,130 +154,240 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-mybatis的逆向工程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      mybatis的逆向工程
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/06/mybatis的逆向工程/" class="archive-article-date">
+
+        
+        <a href="/2019/10/06/mybatis的逆向工程/" class="archive-article-date">
   	<time datetime="2019-10-06T14:09:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/06/mybatis的逆向工程/">mybatis的逆向工程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何使用mybatis的逆向工程？<br>第一步：<br>创建generatorConfig.xml</p>
+<p>第二步：<br>配置generatorConfig.xml中的信息</p>
+<p>第三步：<br>创建相应的包，接收工程产生的代码</p>
+<p>第四部：<br>创建对于的main函数来实现</p>
+<p>附：<br><?xml version="1.0" encoding="UTF-8"?><br><!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"></p>
+<generatorconfiguration>
+    <context id="testTables" targetruntime="MyBatis3">
+        <commentgenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true">
+        </property></commentgenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcconnection driverclass="com.mysql.jdbc.Driver" connectionurl="jdbc:mysql://localhost:3306/zshop" userid="root" password="admin">
+        </jdbcconnection>
 
-        <div class="article-info info-on-right">
-          
-          
 
+<pre><code>    &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+        NUMERIC 类型解析为java.math.BigDecimal --&gt;
+    &lt;javaTypeResolver&gt;
+        &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
+    &lt;/javaTypeResolver&gt;
+
+    &lt;!-- targetProject:生成PO类的位置 --&gt;
+    &lt;javaModelGenerator targetPackage=&quot;com.cqf.dao&quot;
+        targetProject=&quot;.\src&quot;&gt;
+        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+        &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;
+        &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
+    &lt;/javaModelGenerator&gt;
+    &lt;!-- targetProject:mapper映射文件生成的位置 --&gt;
+    &lt;sqlMapGenerator targetPackage=&quot;com.cqf.mapper&quot; 
+        targetProject=&quot;.\src&quot;&gt;
+        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+    &lt;/sqlMapGenerator&gt;
+    &lt;!-- targetPackage：mapper接口生成的位置 --&gt;
+    &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
+        targetPackage=&quot;com.cqf.mapper&quot; 
+        targetProject=&quot;.\src&quot;&gt;
+        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+    &lt;/javaClientGenerator&gt;
+    &lt;!-- 指定数据库表 --&gt;
+    &lt;!-- &lt;table schema=&quot;&quot; tableName=&quot;user&quot;&gt;&lt;/table&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;orders&quot;&gt;&lt;/table&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;items&quot;&gt;&lt;/table&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;orderdetail&quot;&gt;&lt;/table&gt; --&gt;
+
+    &lt;!-- 有些表的字段需要指定java类型 --&gt;
+     &lt;table tableName=&quot;t_sysuser&quot; domainObjectName=&quot;user&quot;&gt;&lt;/table&gt;
+
+
+
+&lt;/context&gt;</code></pre></context></generatorconfiguration>
+
+
+<p>附2：<br>import java.io.File;<br>import java.io.IOException;<br>import java.util.ArrayList;<br>import java.util.List;</p>
+<p>import org.mybatis.generator.api.MyBatisGenerator;<br>import org.mybatis.generator.config.Configuration;<br>import org.mybatis.generator.config.xml.ConfigurationParser;<br>import org.mybatis.generator.exception.XMLParserException;<br>import org.mybatis.generator.internal.DefaultShellCallback;</p>
+<p>public class GeneratorSqlmap {</p>
+<pre><code>public void generator() throws Exception{
+
+    List&lt;String&gt; warnings = new ArrayList&lt;String&gt;();
+    boolean overwrite = true;
+    //指定 逆向工程配置文件
+    File configFile = new File(&quot;generatorConfig.xml&quot;); 
+    ConfigurationParser cp = new ConfigurationParser(warnings);
+    Configuration config = cp.parseConfiguration(configFile);
+    DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+    MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
+            callback, warnings);
+    myBatisGenerator.generate(null);
+
+} 
+public static void main(String[] args) throws Exception {
+    try {
+        GeneratorSqlmap generatorSqlmap = new GeneratorSqlmap();
+        generatorSqlmap.generator();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+}</code></pre><p>}</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/06/mybatis的逆向工程/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/03/the-second-text/" class="archive-article-date">
-  	<time datetime="2019-10-03T09:53:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/03/the-second-text/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android:getText()报错空值</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/03/the-second-text/">Android:getText()报错空值</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/03/My-New-Post/" class="archive-article-date">
-  	<time datetime="2019-10-02T17:37:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/03/My-New-Post/">TextView和EditText的gettext（）方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/03/hello-world/" class="archive-article-date">
-  	<time datetime="2019-10-02T17:28:30.607Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/03/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -296,8 +410,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

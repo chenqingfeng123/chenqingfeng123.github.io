@@ -152,6 +152,153 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mybatis的逆向工程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/06/mybatis的逆向工程/">mybatis的逆向工程</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/06/mybatis的逆向工程/" class="archive-article-date">
+  	<time datetime="2019-10-06T14:09:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何使用mybatis的逆向工程？<br>第一步：<br>创建generatorConfig.xml</p>
+<p>第二步：<br>配置generatorConfig.xml中的信息</p>
+<p>第三步：<br>创建相应的包，接收工程产生的代码</p>
+<p>第四部：<br>创建对于的main函数来实现</p>
+<p>附：<br><?xml version="1.0" encoding="UTF-8"?><br><!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"></p>
+<generatorconfiguration>
+    <context id="testTables" targetruntime="MyBatis3">
+        <commentgenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true">
+        </property></commentgenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcconnection driverclass="com.mysql.jdbc.Driver" connectionurl="jdbc:mysql://localhost:3306/zshop" userid="root" password="admin">
+        </jdbcconnection>
+
+
+<pre><code>    &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+        NUMERIC 类型解析为java.math.BigDecimal --&gt;
+    &lt;javaTypeResolver&gt;
+        &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
+    &lt;/javaTypeResolver&gt;
+
+    &lt;!-- targetProject:生成PO类的位置 --&gt;
+    &lt;javaModelGenerator targetPackage=&quot;com.cqf.dao&quot;
+        targetProject=&quot;.\src&quot;&gt;
+        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+        &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;
+        &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
+    &lt;/javaModelGenerator&gt;
+    &lt;!-- targetProject:mapper映射文件生成的位置 --&gt;
+    &lt;sqlMapGenerator targetPackage=&quot;com.cqf.mapper&quot; 
+        targetProject=&quot;.\src&quot;&gt;
+        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+    &lt;/sqlMapGenerator&gt;
+    &lt;!-- targetPackage：mapper接口生成的位置 --&gt;
+    &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
+        targetPackage=&quot;com.cqf.mapper&quot; 
+        targetProject=&quot;.\src&quot;&gt;
+        &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+    &lt;/javaClientGenerator&gt;
+    &lt;!-- 指定数据库表 --&gt;
+    &lt;!-- &lt;table schema=&quot;&quot; tableName=&quot;user&quot;&gt;&lt;/table&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;orders&quot;&gt;&lt;/table&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;items&quot;&gt;&lt;/table&gt;
+    &lt;table schema=&quot;&quot; tableName=&quot;orderdetail&quot;&gt;&lt;/table&gt; --&gt;
+
+    &lt;!-- 有些表的字段需要指定java类型 --&gt;
+     &lt;table tableName=&quot;t_sysuser&quot; domainObjectName=&quot;user&quot;&gt;&lt;/table&gt;
+
+
+
+&lt;/context&gt;</code></pre></context></generatorconfiguration>
+
+
+<p>附2：<br>import java.io.File;<br>import java.io.IOException;<br>import java.util.ArrayList;<br>import java.util.List;</p>
+<p>import org.mybatis.generator.api.MyBatisGenerator;<br>import org.mybatis.generator.config.Configuration;<br>import org.mybatis.generator.config.xml.ConfigurationParser;<br>import org.mybatis.generator.exception.XMLParserException;<br>import org.mybatis.generator.internal.DefaultShellCallback;</p>
+<p>public class GeneratorSqlmap {</p>
+<pre><code>public void generator() throws Exception{
+
+    List&lt;String&gt; warnings = new ArrayList&lt;String&gt;();
+    boolean overwrite = true;
+    //指定 逆向工程配置文件
+    File configFile = new File(&quot;generatorConfig.xml&quot;); 
+    ConfigurationParser cp = new ConfigurationParser(warnings);
+    Configuration config = cp.parseConfiguration(configFile);
+    DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+    MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
+            callback, warnings);
+    myBatisGenerator.generate(null);
+
+} 
+public static void main(String[] args) throws Exception {
+    try {
+        GeneratorSqlmap generatorSqlmap = new GeneratorSqlmap();
+        generatorSqlmap.generator();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+}</code></pre><p>}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/06/mybatis的逆向工程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-the-second-text" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -236,12 +383,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>TextView的getText（）方法，返回类型是CharSequence，如果判断是否为空的话，只要equals.(&quot;&quot;)或者toString.isEmpty()即可，因为String是CharSequence的实现类，可以直接equals，而且源码中已经为其默认赋值为“”，没有为null的时候。
-EditText的getText（）方法，返回类型是Editable，如果判断是否为空，不能==null，因为不为null，也不能equals（“”），因为类型不一样，只能toString.isEmpty()或者toString.equals(&quot;&quot;),因为EditText继承的TextView，所以默认也为“”，没有null的情况。
+        <p>TextView的getText（）方法，返回类型是CharSequence，如果判断是否为空的话，只要equals.(“”)或者toString.isEmpty()即可，因为String是CharSequence的实现类，可以直接equals，而且源码中已经为其默认赋值为“”，没有为null的时候。<br>EditText的getText（）方法，返回类型是Editable，如果判断是否为空，不能==null，因为不为null，也不能equals（“”），因为类型不一样，只能toString.isEmpty()或者toString.equals(“”),因为EditText继承的TextView，所以默认也为“”，没有null的情况。</p>
+<p>setText()方法报错：<br>当调用setText()方法时如果传入int型是不会被当成内容而是resourceID来使用！所以报错！<br>解决方法：TextView.setText(“” + arg)</p>
 
-setText()方法报错：
-当调用setText()方法时如果传入int型是不会被当成内容而是resourceID来使用！所以报错！
-解决方法：TextView.setText(&quot;&quot; + arg)</code></pre>
       
 
       
